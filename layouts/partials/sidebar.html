@@ -42,6 +42,35 @@
         </li>
       {{ end }}
     </ul>
+    {{/*  <div class="sidebar__categories">
+      <ul class="category-list">
+        {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+          <li>
+            <span>
+              <a href="{{ "categories/" | relURL }}{{ $name | urlize }}" class="category">
+                {{ $name }}   <span class="category-count">({{ len $taxonomy }})</span>
+              </a>
+  
+            </span>
+          </li>
+        {{ end }}
+      </ul>
+    </div>  */}}
+    <!-- Most Used Categories -->
+    {{ if .Site.Params.sidebarCategories }}
+    <h3 style="text-align: center;">Categories</h3>
+    <div class="sidebar__categories">
+        <ul class="category-list">
+        {{ range first 10 (sort .Site.Taxonomies.categories.ByCount "Count" "desc") }}
+            <li>
+            <a href="{{ .Page.Permalink | relURL }}" class="category">
+                {{ .Name }} <span class="category-count">({{ .Count }})</span>
+            </a>
+            </li>
+        {{ end }}
+        </ul>
+    </div>
+    {{ end }}
   </div>
   {{- partial "footer.html" (dict "context" . "footerClassModifier" "sidebar") -}}
 </div>
