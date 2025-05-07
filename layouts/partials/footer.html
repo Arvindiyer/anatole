@@ -33,3 +33,5 @@
 {{- if and (hugo.IsProduction) (.context.Site.Params.gtagId) -}}
   {{ partial "google-analytics-gtag-async.html" .context }}
 {{- end -}}
+<script src="{{ "js/like_button.js" | relURL }}"></script>
+<script src="{{ "js/subscription_form.js" | relURL }}"></script>
